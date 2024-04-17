@@ -1,0 +1,12 @@
+trigger:
+  - main
+pool: My Agent Pool
+
+stages:
+  - stage: Deploy_Test
+    jobs:
+      - job: DeployAndTest
+        steps:
+          - script: cd application && npm i && npm i forever -g
+          - script: forever start application/server.js
+          - pwsh: ./tests/Powershell.Test.ps1
